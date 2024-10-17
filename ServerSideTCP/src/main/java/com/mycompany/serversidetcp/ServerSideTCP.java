@@ -33,10 +33,32 @@ public class ServerSideTCP {
         
         do
         {
-            //run class will go here 
+            eventServer();
         }
         while(true);
         
         
     }//end main block
-}
+    
+    private static void eventServer()
+    {
+        Socket link = null;
+        
+        try
+        {
+            link = servSock.accept();
+            clientConnections++;
+            String clientName = "Client: "+clientConnections;
+            Runnable Resource = new ClientThreadClass(clientName, link);
+            Thread clientThread = new Thread(Resource);
+            clientThread.start();
+        }
+        catch(IOException e)
+        {
+            
+        }
+    }
+    
+    
+}//end class block
+
