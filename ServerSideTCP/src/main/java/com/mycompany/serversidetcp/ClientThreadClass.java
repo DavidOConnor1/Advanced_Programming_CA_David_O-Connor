@@ -110,7 +110,22 @@ public class ClientThreadClass implements Runnable { //start client class
     
     private void addingOperation()
     {
-          
+        try{
+        out.println("Please enter the event details in the format: EventName dd/mm/yyyy time: ");
+        
+        String eventDetails = in.readLine();
+        
+        if(eventDetails != null && !eventDetails.trim().isEmpty())
+        {
+            events.add(eventDetails);
+            out.println("Thank you for adding event: "+eventDetails);
+            System.out.println("Event added by: "+clientName+ ": "+eventDetails);
+        }
+        
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
     
     
