@@ -12,9 +12,10 @@ package com.mycompany.clientserversidetcp;
 import java.io.*;
 import java.net.*;
 import java.net.Socket;
+import java.util.StringTokenizer;
 public class ClientServerSideTCP {
     private static InetAddress host;
-    private static int PORT = 1111;
+    private static final int PORT = 1234;
 
     public static void main(String[] args) { //start main block
         try
@@ -34,25 +35,49 @@ public class ClientServerSideTCP {
         Socket link = null; //intializing the link variable
         try
         {//start try block
+            
             link = new Socket(host, PORT); //establishing a host and a port number to connect to as a client 
             BufferedReader in = new BufferedReader(new InputStreamReader(link.getInputStream())); // Retrives messages from the Server side
-            PrintWriter out = new PrintWriter(link.getOutputStream());
+            PrintWriter out = new PrintWriter(link.getOutputStream(), true);
             
             BufferedReader userEntry = new BufferedReader(new InputStreamReader(System.in)); //this will be for user entries (currently going to be used for testing to ensure the messages go through until I move over to the event Scheduler)
-            String message = null;
-            String response = null;
+            String message ;
+            String response;
+           
+            System.out.println("Connected to Server");
+            System.out.println("The following Commands you can use are");
             
-            System.out.println("Enter Message into the Server");
+            StringTokenizer list = new StringTokenizer("Add, Remove, Stop");
+            
+            while(list.hasMoreTokens())
+            {
+                System.out.println(list.nextToken());
+                
+            }
+            
+            while(true){
             message = userEntry.readLine();
-            out.print(message); //sends a stream of the message data to the server
+           
+              if("stop".equalsIgnoreCase(message))
+            {
+                break;
+            }
+             out.println(message); //sends a stream of the message data to the server
             response = in.readLine(); //brings the server response to display that it has gone through
             System.out.println("\n Server Response: "+response);
+            }
+          
+            
+            
+           
+           
             
         }//end try block
         catch(IOException e)
         {//open catch block
             e.printStackTrace();
         }//close catch block
+      
         finally
         {//open finally block
            try
@@ -66,5 +91,6 @@ public class ClientServerSideTCP {
                 System.exit(1);
            } //end try block
         }//end finally block
+       
     }//end clientServer
 }//end client server class
