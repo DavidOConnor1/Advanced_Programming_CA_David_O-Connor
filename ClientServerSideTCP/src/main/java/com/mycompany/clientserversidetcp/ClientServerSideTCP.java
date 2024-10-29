@@ -12,7 +12,7 @@ package com.mycompany.clientserversidetcp;
 import java.io.*;
 import java.net.*;
 import java.net.Socket;
-import java.util.StringTokenizer;
+
 public class ClientServerSideTCP {
     private static InetAddress host;
     private static final int PORT = 1234;
@@ -45,15 +45,9 @@ public class ClientServerSideTCP {
             String response;
            
             System.out.println("Connected to Server");
-            System.out.println("The following Commands you can use are");
+            System.out.println("Enter commands (add <event>, remove <event>, list, exit):");
             
-            StringTokenizer list = new StringTokenizer("Add, Remove, Stop");
-            
-            while(list.hasMoreTokens())
-            {
-                System.out.println(list.nextToken());
-                
-            }
+           
             
             while(true){
             message = userEntry.readLine();
