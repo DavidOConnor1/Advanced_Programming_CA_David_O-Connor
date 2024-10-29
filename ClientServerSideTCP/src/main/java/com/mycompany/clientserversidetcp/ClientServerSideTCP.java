@@ -45,7 +45,7 @@ public class ClientServerSideTCP {
             String response;
            
             System.out.println("Connected to Server");
-            System.out.println("Enter commands (add <event>, remove <event>, list, exit):");
+            System.out.println("Enter commands (add <event> dd/mm/yyyy HH:mm(am|pm), remove <event>dd/mm/yyyy HH:mm(am|pm), stop):");
             
            
             

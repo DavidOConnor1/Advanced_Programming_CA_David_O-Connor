@@ -85,6 +85,9 @@ public class ClientThreadClass implements Runnable { //start client class
         
     } //end runnable method
     
+    private static final String eventFormat = "^[^\\d]+ \\d{2}/\\d{2}/\\d{4} (\\d{1,2}:\\d{2}(am|pm)?)$";
+
+    
     private void handleOperations(String command) throws IncorrectActionException {
          String[] parts = command.split(" ", 2); //will read the space after the command and then add the event
          String executables = parts[0].toLowerCase(); //it is the first part of the command
@@ -96,6 +99,11 @@ public class ClientThreadClass implements Runnable { //start client class
                         out.println("Usage: add <event>");
                     } else {
                         String event = parts[1]; //will take the event based on what comes after add
+                        if(!event.matches(eventFormat))
+                        {
+                            out.println("invalid format. Please use: Event dd/mm/yyyy HH:mm");
+                            break;
+                        }
                         events.add(event); //adds the event to the list
                         out.println("Event added: " + event); //displays to the client the event has been added
                     }
